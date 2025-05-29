@@ -1,0 +1,22 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🔥 Compilar y ejecutar archivo C actual",
+      "type": "shell",
+      "command": "C:\\msys64\\usr\\bin\\bash.exe",
+      "args": [
+        "-c",
+        "gcc ${file} -o ${fileDirname}/a.exe && ${fileDirname}/a.exe"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${fileDirname}"
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compilar y ejecutar PRUEBA.c",
+      "type": "shell",
+      "command": "C:\\msys64\\mingw64.exe",
+      "args": [
+        "-c",
+        "gcc PRUEBA.c -o PRUEBA && ./PRUEBA"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      }
+    }
+  ]
+}
