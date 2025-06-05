@@ -28,19 +28,17 @@ int main() {
     double* u = (double*)malloc(N * sizeof(double));
     double* u_new = (double*)malloc(N * sizeof(double));
 
-    // Inicialización paralela
+    // Inicialización: todo frío
     #pragma omp parallel for
     for (int i = 0; i < N; i++) {
-        u[i] = 0.0;  // Temperatura inicial fría
+        u[i] = 0.0;
     }
 
-    // Condición inicial: campana gaussiana (no paralelizable)
-    #pragma omp parallel for
-    for (int i = 0; i < N; i++) {
-        double x = i * dx;
-        double mu = L / 2.0;
-        double sigma = 0.1; // Ajusta el ancho de la campana
-        u[i] = 100.0 * exp(-((x - mu)*(x - mu)) / (2 * sigma * sigma));
+    // Condición inicial: bloque caliente en el centro
+    int bloque_inicio = N / 3;
+    int bloque_fin = 2 * N / 3;
+    for (int i = bloque_inicio; i < bloque_fin; i++) {
+        u[i] = 100.0;
     }
 
     // Archivo para guardar resultados

@@ -28,15 +28,22 @@ int main() {
         u_new[i] = (double*)malloc(NY * sizeof(double));
     }
 
-    // Inicialización: campana gaussiana en el centro
+    // Inicialización: todo frío
     #pragma omp parallel for collapse(2)
     for (int i = 0; i < NX; i++) {
         for (int j = 0; j < NY; j++) {
-            double x = i * dx;
-            double y = j * dy;
-            double mu = L / 2.0;
-            double sigma = 0.1;
-            u[i][j] = 100.0 * exp(-((x - mu)*(x - mu) + (y - mu)*(y - mu)) / (2 * sigma * sigma));
+            u[i][j] = 0.0;
+        }
+    }
+
+    // Condición inicial: bloque caliente en el centro
+    int bloque_x_inicio = NX / 3;
+    int bloque_x_fin = 2 * NX / 3;
+    int bloque_y_inicio = NY / 3;
+    int bloque_y_fin = 2 * NY / 3;
+    for (int i = bloque_x_inicio; i < bloque_x_fin; i++) {
+        for (int j = bloque_y_inicio; j < bloque_y_fin; j++) {
+            u[i][j] = 100.0;
         }
     }
 
