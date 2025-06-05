@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <omp.h> 
+#include <math.h>
 
 // Parámetros de la simulación
 #define N 1000               // Número de puntos en la barra
@@ -33,11 +34,13 @@ int main() {
         u[i] = 0.0;  // Temperatura inicial fría
     }
 
-    // Condición inicial: zona caliente en el centro (no paralelizable)
-    const int center_start = N/2 - CENTER_WIDTH/2;
-    const int center_end = N/2 + CENTER_WIDTH/2;
-    for (int i = center_start; i < center_end; i++) {
-        u[i] = 100.0;  // 100°C en el centro
+    // Condición inicial: campana gaussiana (no paralelizable)
+    #pragma omp parallel for
+    for (int i = 0; i < N; i++) {
+        double x = i * dx;
+        double mu = L / 2.0;
+        double sigma = 0.1; // Ajusta el ancho de la campana
+        u[i] = 100.0 * exp(-((x - mu)*(x - mu)) / (2 * sigma * sigma));
     }
 
     // Archivo para guardar resultados
@@ -66,7 +69,6 @@ int main() {
 
         // Guardar datos cada 100 pasos (opcional para animaciones)
         if (n % 100 == 0) {
-            #pragma omp parallel for
             for (int i = 0; i < N; i++) {
                 fprintf(output, "%f,%f,%f\n", n*dt, i*dx, u[i]);
             }

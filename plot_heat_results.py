@@ -4,10 +4,10 @@ import numpy as np
 
 def plot_1d_heat(filename):
     df = pd.read_csv(filename)
-    # Selecciona algunos tiempos para graficar
+    # Ordena por posición para evitar líneas locas
     times = df['time'].unique()
     for t in times[::max(1, len(times)//5)]:
-        subset = df[df['time'] == t]
+        subset = df[df['time'] == t].sort_values('position')
         plt.plot(subset['position'], subset['temperature'], label=f"t={t:.3f}s")
     plt.xlabel("Posición (m)")
     plt.ylabel("Temperatura (°C)")
