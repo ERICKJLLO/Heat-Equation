@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
 def plot_1d_heat(filename):
     df = pd.read_csv(filename)
@@ -13,16 +14,32 @@ def plot_1d_heat(filename):
     plt.ylabel("Temperatura (°C)")
     plt.title("Difusión de calor 1D")
     plt.legend()
-    plt.show()
+    plt.show(block=False)
 
 def plot_2d_heat(filename, time_index=0):
     """
     Grafica la temperatura en 2D para un tiempo específico.
     """
+    if not os.path.exists(filename):
+        print(f"El archivo '{filename}' no existe.")
+        return
     df = pd.read_csv(filename)
+    if df.empty:
+        print(f"El archivo '{filename}' está vacío.")
+        return
+    if len(df.columns) < 4:
+        print(f"El archivo '{filename}' no tiene las columnas necesarias.")
+        print(f"Columnas encontradas: {df.columns.tolist()}")
+        return
+    if len(df['time'].unique()) == 0:
+        print(f"El archivo '{filename}' no contiene datos de tiempo.")
+        return
     times = sorted(df['time'].unique())
+    if time_index >= len(times):
+        print(f"El índice de tiempo {time_index} está fuera de rango. Hay {len(times)} tiempos disponibles.")
+        return
     t = times[time_index]
-    subset = df[df['time'] == t]
+    subset = df[df['time'] == t].sort_values(['x', 'y'])
     x = np.sort(subset['x'].unique())
     y = np.sort(subset['y'].unique())
     X, Y = np.meshgrid(x, y)
@@ -33,7 +50,7 @@ def plot_2d_heat(filename, time_index=0):
     plt.xlabel("x (m)")
     plt.ylabel("y (m)")
     plt.title(f"Difusión de calor 2D (t={t:.3f}s)")
-    plt.show()
+    plt.show(block=False)
 
 def plot_3d_heat(filename, time_index=0, z_index=0):
     """
@@ -59,3 +76,5 @@ def plot_3d_heat(filename, time_index=0, z_index=0):
 
 if __name__ == "__main__":
     plot_1d_heat("heat_results.csv")
+    plot_2d_heat("heat2d_results.csv", time_index=0)
+    input("Presiona Enter para cerrar las gráficas...")
