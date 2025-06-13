@@ -8,13 +8,6 @@ cd Heat-Equation
 
 ## Carpetas y archivos principales del repositorio 
 
-- ***Archivo principal***
-  
-```bash
-Heat-Equation/
-├── final_report.ipynb  
-```
-
 - Rsultados de tiempo en paralelo y secuencial 
 ```bash
 Heat-Equation/
@@ -67,4 +60,9 @@ Heat-Equation/
 Heat-Equation/
 ├── makefile  
 ```
-
+- Archivo reporte inicial principal
+  
+```bash
+Heat-Equation/
+├── final_report.ipynb  
+```
