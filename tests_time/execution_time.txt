@@ -1,3 +1,4 @@
+# Primera Prueba
 heat_1d_secuencial.c, Tiempo: 0.0000 segundos
 heat_1d_parallel.c, THREADS=4, Tiempo: 0.0030 segundos
 
@@ -6,3 +7,14 @@ heat_2d_parallel.c, THREADS=4, Tiempo: 0.0010 segundos
 
 heat_3d_secuencial.c, Tiempo: 0.0010 segundos
 heat_3d_parallel.c, THREADS=4, Tiempo: 0.0010 segundos
+
+
+# Segunda Prueba
+heat_1d_secuencial.c, Tiempo: 0.1523 segundos
+heat_1d_parallel.c, THREADS=4, Tiempo: 0.0412 segundos
+
+heat_2d_secuencial.c, Tiempo: 1.4376 segundos
+heat_2d_parallel.c, THREADS=4, Tiempo: 0.3891 segundos
+
+heat_3d_secuencial.c, Tiempo: 6.9328 segundos
+heat_3d_parallel.c, THREADS=4, Tiempo: 1.8795 segundos
