@@ -41,10 +41,6 @@ int main() {
         u[i] = 100.0;
     }
 
-    // Archivo para guardar resultados
-    FILE *output = fopen("heat_results.csv", "w");
-    fprintf(output, "time,position,temperature\n");
-
     double start_time = omp_get_wtime();
 
     // Bucle principal de simulación
@@ -65,12 +61,6 @@ int main() {
             u[i] = u_new[i];
         }
 
-        // Guardar datos cada 100 pasos (opcional para animaciones)
-        if (n % 100 == 0) {
-            for (int i = 0; i < N; i++) {
-                fprintf(output, "%f,%f,%f\n", n*dt, i*dx, u[i]);
-            }
-        }
     }
 
     double end_time = omp_get_wtime();
@@ -84,7 +74,11 @@ int main() {
     // Liberar memoria
     free(u);
     free(u_new);
-    fclose(output);
+
+    // Guardar tiempo en un archivo txt
+    FILE *ftime = fopen("execution_time.txt", "a");
+    fprintf(ftime, "heat_1d_parallel.c, THREADS=%d, Tiempo: %.4f segundos\n", THREADS, end_time - start_time);
+    fclose(ftime);
 
     return 0;
 }

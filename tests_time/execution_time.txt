@@ -1,0 +1,8 @@
+heat_1d_secuencial.c, Tiempo: 0.0000 segundos
+heat_1d_parallel.c, THREADS=4, Tiempo: 0.0030 segundos
+
+heat_2d_secuencial.c, Tiempo: 0.0000 segundos
+heat_2d_parallel.c, THREADS=4, Tiempo: 0.0010 segundos
+
+heat_3d_secuencial.c, Tiempo: 0.0010 segundos
+heat_3d_parallel.c, THREADS=4, Tiempo: 0.0010 segundos

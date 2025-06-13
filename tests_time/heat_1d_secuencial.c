@@ -35,10 +35,6 @@ int main() {
         u[i] = 100.0;
     }
 
-    // Archivo para guardar resultados
-    FILE *output = fopen("heat_results_secuencial.csv", "w");
-    fprintf(output, "time,position,temperature\n");
-
     double start_time = 0.0, end_time = 0.0;
     start_time = (double)clock() / CLOCKS_PER_SEC;
 
@@ -58,12 +54,6 @@ int main() {
             u[i] = u_new[i];
         }
 
-        // Guardar datos cada 100 pasos (opcional para animaciones)
-        if (n % 100 == 0) {
-            for (int i = 0; i < N; i++) {
-                fprintf(output, "%f,%f,%f\n", n*dt, i*dx, u[i]);
-            }
-        }
     }
 
     end_time = (double)clock() / CLOCKS_PER_SEC;
@@ -77,7 +67,11 @@ int main() {
     // Liberar memoria
     free(u);
     free(u_new);
-    fclose(output);
+
+    // Guardar tiempo en un archivo txt
+    FILE *ftime = fopen("execution_time.txt", "a");
+    fprintf(ftime, "heat_1d_secuencial.c, Tiempo: %.4f segundos\n", end_time - start_time);
+    fclose(ftime);
 
     return 0;
 }

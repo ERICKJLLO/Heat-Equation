@@ -15,6 +15,13 @@ Heat-Equation/
 ├── final_report.ipynb  
 ```
 
+- Rsultados de tiempo en paralelo y secuencial 
+```bash
+Heat-Equation/
+├── tests_time/
+    ├── execution_time.txt
+```
+
 - Para ver la documentación teorica de cada ecuación de calor
   
 ```bash
