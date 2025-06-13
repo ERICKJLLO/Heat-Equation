@@ -8,7 +8,7 @@ cd Heat-Equation
 
 ## Carpetas y archivos principales del repositorio 
 
-- Archivo principal
+- **Archivo principal**
   
   Heat-Equation/final_report.ipynb
   
